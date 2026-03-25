@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-white text-ink font-dm overflow-x-hidden;
+  }
+  
+  ::selection {
+    @apply bg-red text-white;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
+  }
+  
+  .section-label {
+    @apply inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.25em] uppercase text-red mb-3;
+  }
+  
+  .section-label::before {
+    content: '';
+    @apply w-6 h-[1.5px] bg-red;
+  }
+  
+  .section-title {
+    @apply font-playfair text-4xl md:text-5xl lg:text-[3.2rem] font-black leading-[1.05] text-ink;
+  }
+  
+  .section-title em {
+    @apply text-red italic not-italic;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 bg-red text-white text-[0.82rem] font-semibold tracking-[0.125em] uppercase relative overflow-hidden transition-all duration-300 hover:bg-red2 hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(200,16,46,0.3)];
+  }
+  
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/15 to-transparent -translate-x-full skew-x-[-12deg] transition-transform duration-500 ease-out;
+  }
+  
+  .btn-primary:hover::after {
+    transform: translateX(100%) skewX(-12deg);
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 border-2 border-border2 text-ink text-[0.82rem] font-semibold tracking-[0.125em] uppercase transition-all duration-300 hover:border-red hover:text-red hover:-translate-y-0.5;
+  }
+}
+
+@layer utilities {
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
