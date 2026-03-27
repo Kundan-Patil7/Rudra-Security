@@ -67,7 +67,7 @@ export default function Navbar() {
             <div className="w-11 h-10  flex items-center justify-center rounded transition-transform duration-300 group-hover:scale-105 overflow-hidden">
               <Image src="/logos/logo.png" alt="Rudra Security" width={50} height={50} className="object-contain" />
             </div>
-            <div className="font-playfair text-lg font-bold text-ink leading-tight">
+            <div className="font-playfair text-lg text-white font-bold text-ink leading-tight">
               Rudra Security
               <small className="block font-dm text-[0.62rem] font-normal tracking-[0.25em] uppercase text-ink3">
                 Est. 2018 · ISO Certified

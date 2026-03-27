@@ -176,20 +176,7 @@ export default function HeroSection() {
                   <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
                 
-                <div>
-                  <div className="text-xs font-bold tracking-wider uppercase text-white/80">
-                    Emergency Hotline
-                  </div>
-                  <a 
-                    href="tel:7020898975" 
-                    className="font-playfair text-2xl md:text-3xl font-black text-white hover:text-white/90 transition-colors block"
-                  >
-                    70208 98975
-                  </a>
-                  <div className="text-[0.65rem] text-white/70 mt-1">
-                    Available 24/7 for emergencies
-                  </div>
-                </div>
+               
               </div>
               
               <div className="mt-4 pt-3 border-t border-white/20">
