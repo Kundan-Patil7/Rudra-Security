@@ -64,8 +64,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-6 md:px-12 h-full">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 bg-red flex items-center justify-center rounded transition-transform duration-300 group-hover:scale-105 overflow-hidden">
-              <Image src="/logos/logo.png" alt="Rudra Security" width={36} height={36} className="object-contain" />
+            <div className="w-11 h-10  flex items-center justify-center rounded transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+              <Image src="/logos/logo.png" alt="Rudra Security" width={50} height={50} className="object-contain" />
             </div>
             <div className="font-playfair text-lg font-bold text-ink leading-tight">
               Rudra Security

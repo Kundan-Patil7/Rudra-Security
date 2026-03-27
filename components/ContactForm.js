@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ export default function ContactForm() {
     flocation: '',
     fmessage: '',
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState({});
@@ -33,6 +35,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -40,10 +43,41 @@ export default function ContactForm() {
     }
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    try {
+      await emailjs.send(
+        'service_xy9p68s',
+        'template_jjg3u07',
+        {
+          fname: formData.fname,
+          fphone: formData.fphone,
+          femail: formData.femail,
+          fcompany: formData.fcompany,
+          fservice: formData.fservice,
+          flocation: formData.flocation,
+          fmessage: formData.fmessage,
+        },
+        'aqxJi4gNtXqpu1mZx'
+      );
+
+      setIsSuccess(true);
+
+      setFormData({
+        fname: '',
+        fphone: '',
+        femail: '',
+        fcompany: '',
+        fservice: '',
+        flocation: '',
+        fmessage: '',
+      });
+
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      alert('❌ Failed to send message. Try again.');
+    }
+
     setIsSubmitting(false);
-    setIsSuccess(true);
   };
 
   if (isSuccess) {
@@ -56,12 +90,19 @@ export default function ContactForm() {
         <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center mx-auto mb-6">
           <span className="text-3xl">✅</span>
         </div>
-        <h3 className="font-playfair text-2xl md:text-3xl font-bold text-ink mb-3">Message Received!</h3>
+        <h3 className="font-playfair text-2xl md:text-3xl font-bold text-ink mb-3">
+          Message Received!
+        </h3>
         <p className="text-sm text-ink3 max-w-sm mx-auto mb-4">
           Thank you for contacting Rudra Security. Our team will reach out to you within 2 hours with a detailed response.
         </p>
-        <p className="text-xs text-ink3 mb-2">For urgent matters, call us directly:</p>
-        <a href="tel:7020898975" className="font-bebas text-2xl md:text-3xl text-red tracking-wide">
+        <p className="text-xs text-ink3 mb-2">
+          For urgent matters, call us directly:
+        </p>
+        <a
+          href="tel:7020898975"
+          className="font-bebas text-2xl md:text-3xl text-red tracking-wide"
+        >
           70208 98975
         </a>
       </motion.div>
@@ -70,8 +111,12 @@ export default function ContactForm() {
 
   return (
     <div className="p-8 md:p-12 lg:p-16 bg-white border-l border-border">
-      <h2 className="font-playfair text-2xl md:text-3xl font-bold text-ink mb-2">Send Us a Message</h2>
-      <p className="text-sm text-ink3 mb-9">Fill out the form below and we'll get back to you within 2 hours.</p>
+      <h2 className="font-playfair text-2xl md:text-3xl font-bold text-ink mb-2">
+        Send Us a Message
+      </h2>
+      <p className="text-sm text-ink3 mb-9">
+        Fill out the form below and we'll get back to you within 2 hours.
+      </p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid md:grid-cols-2 gap-5">
@@ -89,6 +134,7 @@ export default function ContactForm() {
             />
             {errors.fname && <p className="text-xs text-red mt-1">{errors.fname}</p>}
           </div>
+
           <div>
             <label htmlFor="fphone" className="block text-[0.68rem] font-semibold tracking-[0.156rem] uppercase text-ink3 mb-2">
               Phone <span className="text-red">*</span>
@@ -119,6 +165,7 @@ export default function ContactForm() {
               placeholder="you@company.com"
             />
           </div>
+
           <div>
             <label htmlFor="fcompany" className="block text-[0.68rem] font-semibold tracking-[0.156rem] uppercase text-ink3 mb-2">
               Company / Society
@@ -196,7 +243,10 @@ export default function ContactForm() {
         >
           {isSubmitting ? 'Sending...' : 'Send Message →'}
         </button>
-        <p className="text-xs text-ink3 text-center mt-3">🔒 Your information is kept strictly confidential</p>
+
+        <p className="text-xs text-ink3 text-center mt-3">
+          🔒 Your information is kept strictly confidential
+        </p>
       </form>
     </div>
   );
